@@ -20,7 +20,7 @@ REPO_DIR = os.path.dirname(BASE_DIR)
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-jmmspe6t(j^z+3*zs0fc6xirph$#-h!1lu!1p@1c^)r)bu6r^s"
+SECRET_KEY = "fake-secret-django-insecure-jmmspe6t(j^z+3*zs0fc6xirph$#-h!1lu!1p@1c^)r)bu6r^s"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -103,7 +103,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
-    # 'DATETIME_FORMAT': ['%d-%m-%Y',],
     "DATE_INPUT_FORMATS": [
         "%d-%m-%Y",
     ],
