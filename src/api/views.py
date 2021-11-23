@@ -7,8 +7,11 @@ from api.serializers import PersonSerializer, ReminderSerializer
 
 class ReminderViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
-    queryset = Reminder.objects.all()
     serializer_class = ReminderSerializer
+
+    def get_queryset(self):
+        # ensure you get only your own reminders
+        return Reminder.objects.filter(birthday_person__user=self.request.user.pk)
 
 
 class PersonViewSet(viewsets.ModelViewSet):

@@ -92,3 +92,24 @@ class TestReminderViewSet:
         data = {"birthday_person": test_person.pk, "how_early": 10}
         resp = authenticated_client.post(reverse("api:reminders-list"), data=data)
         assert resp.status_code == 201
+
+    def test_create_reminder_from_people_on_your_list(self, authenticated_client, test_another_person):
+        data = {"birthday_person": test_another_person.pk}
+        resp = authenticated_client.post(reverse("api:reminders-list"), data=data)
+        assert resp.status_code == 400
+        response_dict = resp.json()
+        assert response_dict["birthday_person"][0] == 'Invalid pk "2" - object does not exist.'
+
+    def test_create_reminder_from_non_existing_person(self, authenticated_client):
+        data = {"birthday_person": 99}
+        resp = authenticated_client.post(reverse("api:reminders-list"), data=data)
+        assert resp.status_code == 400
+        response_dict = resp.json()
+        assert response_dict["birthday_person"][0] == 'Invalid pk "99" - object does not exist.'
+
+    def test_list_only_my_contacts(self, authenticated_client, user, test_another_reminder, test_reminder):
+        resp = authenticated_client.get(reverse("api:reminders-list"))
+        assert resp.status_code == 200
+        response_dict = resp.json()
+        assert len(response_dict) == 1
+        assert response_dict[0]["birthday_person"] == test_reminder.birthday_person.pk

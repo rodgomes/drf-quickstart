@@ -1,8 +1,9 @@
 from django.contrib.auth import get_user_model
 from django.utils import timezone
-from api.models import Person
 
 import pytest
+
+from api.models import Person, Reminder
 
 
 @pytest.fixture
@@ -13,8 +14,30 @@ def user():
 
 
 @pytest.fixture
+def another_user():
+    username = "user2"
+    password = "fakepass"
+    return get_user_model().objects.create_user(username=username, password=password)
+
+
+@pytest.fixture
 def test_person(user):
     return Person.objects.create(name="Test1", birthdate=timezone.now(), user=user)
+
+
+@pytest.fixture
+def test_another_person(another_user):
+    return Person.objects.create(name="Test1", birthdate=timezone.now(), user=another_user)
+
+
+@pytest.fixture
+def test_another_reminder(test_another_person):
+    return Reminder.objects.create(birthday_person=test_another_person)
+
+
+@pytest.fixture
+def test_reminder(test_person):
+    return Reminder.objects.create(birthday_person=test_person)
 
 
 @pytest.fixture
