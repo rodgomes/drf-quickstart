@@ -1,0 +1,35 @@
+
+[tool.poetry]
+name = "drf-quickstart"
+version = "0.1.0"
+description = "Quickstart project with Django and DRF"
+authors = ["Rodrigo de Paiva Gomes <me@rodgomes.org>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+Django = "^3.2.9"
+djangorestframework = "^3.12.4"
+uWSGI = "^2.0.20"
+whitenoise = "^5.3.0"
+PyYAML = "^6.0"
+uritemplate = "^4.1.1"
+pytest-django = "^4.4.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.5"
+black = "^21.10b0"
+lint = "^1.2.1"
+flake8 = "^4.0.1"
+coverage = "^6.1.1"
+django-extensions = "^3.1.5"
+pytest-cov = "^3.0.0"
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 120
+target_version = ['py38']
+# exclude = "src/config/settings.py"
