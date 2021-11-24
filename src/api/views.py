@@ -16,5 +16,8 @@ class ReminderViewSet(viewsets.ModelViewSet):
 
 class PersonViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
-    queryset = Person.objects.all()
     serializer_class = PersonSerializer
+
+    def get_queryset(self):
+        # ensure you get only your own contacts
+        return Person.objects.filter(user=self.request.user.pk)

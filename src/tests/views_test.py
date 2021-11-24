@@ -60,6 +60,11 @@ class TestPersonViewSet:
         response_dict = resp.json()
         assert response_dict["name"] == "Test1"
 
+    def test_get_only_my_person(self, authenticated_client, another_user):
+        p1 = Person.objects.create(name="Test1", birthdate=timezone.now(), user=another_user)
+        resp = authenticated_client.get(reverse("api:persons-detail", kwargs={"pk": p1.pk}))
+        assert resp.status_code == 404
+
     def test_get_non_existing_person(self, authenticated_client):
         resp = authenticated_client.get(reverse("api:persons-detail", kwargs={"pk": "non-existing"}))
         assert resp.status_code == 404
