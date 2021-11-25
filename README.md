@@ -35,7 +35,3 @@ Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 ```
 
-
-## License
-
-Released under [MIT](/LICENSE) by [@rodgomes](https://github.com/rodgomes).
