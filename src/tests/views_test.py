@@ -3,7 +3,7 @@ from django.utils import timezone
 
 import pytest
 
-from api.models import Person
+from api.models import Person, Reminder
 
 
 @pytest.mark.django_db
@@ -97,6 +97,10 @@ class TestReminderViewSet:
         data = {"birthday_person": test_person.pk, "how_early": 10}
         resp = authenticated_client.post(reverse("api:reminders-list"), data=data)
         assert resp.status_code == 201
+        r = Reminder.objects.filter(birthday_person=test_person.pk, how_early=10).first()
+        # the bday is 09/09
+        assert r.reminder_day.day == 30
+        assert r.reminder_day.month == 8
 
     def test_create_reminder_from_people_on_your_list(self, authenticated_client, test_another_person):
         data = {"birthday_person": test_another_person.pk}

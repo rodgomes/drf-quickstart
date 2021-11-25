@@ -20,3 +20,4 @@ class Reminder(models.Model, AuditMixin):
 
     birthday_person = models.OneToOneField(Person, on_delete=models.CASCADE)
     how_early = models.PositiveIntegerField(default=0)
+    reminder_day = models.DateField(null=True)

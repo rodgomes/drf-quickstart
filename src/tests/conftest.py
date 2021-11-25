@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 
@@ -22,7 +24,8 @@ def another_user():
 
 @pytest.fixture
 def test_person(user):
-    return Person.objects.create(name="Test1", birthdate=timezone.now(), user=user)
+    bday = datetime.strptime("09-09-1999", "%d-%m-%Y")
+    return Person.objects.create(name="Test1", birthdate=bday, user=user)
 
 
 @pytest.fixture
