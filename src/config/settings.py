@@ -141,17 +141,31 @@ LOGGING = {
             "()": "django.utils.log.RequireDebugTrue",
         }
     },
+    "disable_existing_loggers": False,
+    "formatters": {
+        "console": {
+            "format": "%(asctime)s %(name)-12s %(levelname)-8s %(message)s",
+        },
+    },
     "handlers": {
         "console": {
             "level": "DEBUG",
             "filters": ["require_debug_true"],
             "class": "logging.StreamHandler",
-        }
+            "formatter": "console",
+        },
     },
     "loggers": {
+        "": {"level": "DEBUG", "handlers": ["console"]},
         "django.db.backends": {
             "level": "DEBUG",
             "handlers": ["console"],
-        }
+        },
     },
 }
+
+
+# This configuration is for running local.
+# see https://docs.djangoproject.com/en/3.2/topics/email/#email-backends for more info
+DEFAULT_EMAIL_FROM = "from@example.com"
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
