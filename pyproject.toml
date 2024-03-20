@@ -17,7 +17,7 @@ pytest-django = "^4.4.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.5"
-black = "^21.10b0"
+black = "^24.3"
 lint = "^1.2.1"
 flake8 = "^4.0.1"
 coverage = "^6.1.1"
