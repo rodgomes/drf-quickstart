@@ -8,7 +8,7 @@ authors = ["Rodrigo de Paiva Gomes <me@rodgomes.org>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 Django = "^4.2.16"
-djangorestframework = "^3.12.4"
+djangorestframework = "^3.15.2"
 uWSGI = "^2.0.22"
 whitenoise = "^5.3.0"
 PyYAML = "^6.0"
